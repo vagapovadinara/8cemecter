@@ -1,8 +1,8 @@
-import { JSX, useState } from "react"
+import { JSX } from "react";
 import { Link } from "react-router-dom";
 import { AppRoute } from "../../const";
 
-type CitiesCardProps = {
+type FavoritesCardProps = {
   id: string;
   title: string;
   type : string;
@@ -13,33 +13,31 @@ type CitiesCardProps = {
 }
 
 
-
-
-function CitiesCard({id,title,type,price,isPremium,previewImage,rating} : CitiesCardProps): JSX.Element {
-  const [, setOfferId] =useState('')
+function FavoritesCard({id,title,type,price,isPremium,previewImage,rating}  : FavoritesCardProps): JSX.Element {
     return(
-        <article className="cities__card place-card" onMouseOver={() => setOfferId(id)} onMouseOut={() => setOfferId('')}>
-              {isPremium ? (
+        <article className="favorites__card place-card">
+            {isPremium ? (
                 <div className="place-card__mark">
                   <span>Premium</span>
                 </div>) : null
-                } 
-        <div className="cities__image-wrapper place-card__image-wrapper">
-          <Link to={`${AppRoute.Offer}/${id}`}>
-            <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
-          </Link>
+                }
+        <div className="favorites__image-wrapper place-card__image-wrapper">
+        <Link to={`${AppRoute.Offer}/${id}`}>
+          <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place image"/>
+        </Link>
+
         </div>
-        <div className="place-card__info">
+        <div className="favorites__card-info place-card__info">
           <div className="place-card__price-wrapper">
             <div className="place-card__price">
               <b className="place-card__price-value">&euro;{price}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
-            <button className="place-card__bookmark-button button" type="button">
+            <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
               <svg className="place-card__bookmark-icon" width="18" height="19">
                 <use href="#icon-bookmark"></use>
               </svg>
-              <span className="visually-hidden">To bookmarks</span>
+              <span className="visually-hidden">In bookmarks</span>
             </button>
           </div>
           <div className="place-card__rating rating">
@@ -53,8 +51,9 @@ function CitiesCard({id,title,type,price,isPremium,previewImage,rating} : Cities
           </h2>
           <p className="place-card__type">{type}</p>
         </div>
-      </article>
-    )
-}
+        </article>
+        );
+    }
 
-export default CitiesCard;
+export default FavoritesCard;
+    
